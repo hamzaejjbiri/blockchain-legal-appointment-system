@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title }}</title>
+  <link href="{{ url_for('static', filename='CSS/styles.css') }}" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+  <!-- HERO + NAV -->
+  <section id="Menu">
+    <nav class="navbar">
+      <div class="brand">
+        THE HOUSE OF WA
+        <small>A LAW FIRM AGENCY</small>
+      </div>
+
+      <ul>
+        <li><a href="#Menu">Home</a></li>
+        <li><a href="#attorneys">Attorneys</a></li>
+        <li><a href="#footer">Contact</a></li>
+
+        <!-- Show ONLY after first mined booking exists -->
+        {% if posts %}
+          <li><a href="#requests">Appointments</a></li>
+        {% endif %}
+
+        <!-- Only ONE button that goes to the form -->
+        <li><a class="cta" href="#consultation">Book Now</a></li>
+      </ul>
+    </nav>
+
+    <div class="container">
+      <div class="kicker">WELCOME TO THE HOUSE OF WA</div>
+
+      <h1 class="hero-title">
+        Attorneys Fighting For<br />
+        Your <span class="accent">Rights.</span>
+      </h1>
+
+      <p class="hero-sub">
+        Tell us your issue and choose a department. We’ll get back to you as soon as possible.
+      </p>
+
+      <a href="#consultation" class="button">Book an Appointment</a>
+    </div>
+  </section>
+
+  <!-- Flash messages (optional) -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div style="max-width:1100px;margin:20px auto;padding:0 50px;">
+        <ul>
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+
+  <!-- FOOTER -->
+  <footer id="footer" class="footer">
+    <div class="footer-grid">
+      <div>
+        <div class="brand">
+          THE HOUSE OF WA
+          <small>A LAW FIRM AGENCY</small>
+        </div>
+        <p style="margin-top:18px; line-height:1.7;">
+          Far far away, behind the word mountains, far from the countries
+          Vokalia and Consonantia, there live the blind texts.
+        </p>
+      </div>
+
+      <div>
+        <h3>Practice Areas</h3>
+        <ul>
+          <li><a href="#">Family Law</a></li>
+          <li><a href="#">Business Law</a></li>
+          <li><a href="#">Insurance Law</a></li>
+          <li><a href="#">Criminal Law</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Have a Questions?</h3>
+        <ul>
+          <li>203 Fake St. Mountain View, USA</li>
+          <li>+2 392 3929 210</li>
+          <li>info@yourdomain.com</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3>Business Hours</h3>
+        <ul>
+          <li><span style="color: var(--accent); font-weight:700;">Opening Days:</span></li>
+          <li>Mon–Fri: 9am to 8pm</li>
+          <li>Sat: 9am to 5pm</li>
+          <li style="margin-top:14px;"><span style="color: var(--accent); font-weight:700;">Vacations:</span></li>
+          <li>All Sundays</li>
+          <li>All Official Holidays</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="copyright">
+      Copyright ©2025 All rights reserved
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

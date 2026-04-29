@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- CONSULTATION FORM -->
+<section id="consultation" class="split">
+  <div class="split-left"></div>
+
+  <div class="split-right">
+    <div class="small">Booking an Appointment</div>
+    <h2>Free Consultation</h2>
+
+    <form action="/submit" method="post" class="form">
+      <input title="name" id="name" type="text" name="name" placeholder="Your Name" required>
+      <input title="email" id="email" type="email" name="email" placeholder="Your Email" required>
+      <input title="phone" id="phone" type="tel" name="phone" placeholder="Your Phone" required>
+
+      <!-- 4 departments -->
+      <select title="department" id="department" name="department" required>
+        <option value="">Select Department</option>
+        <option value="Family Law">Family Law</option>
+        <option value="Business Law">Business Law</option>
+        <option value="Insurance Law">Insurance Law</option>
+        <option value="Criminal Law">Criminal Law</option>
+      </select>
+
+      <textarea id="message" title="message" name="message" placeholder="Message" required></textarea>
+
+      <div class="form-button">
+        <button type="submit" class="dark-btn">Send message</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+
+
+<!-- ATTORNEYS -->
+<section id="attorneys">
+  <div class="title">
+    <p style="color: var(--accent); font-weight:700;">Our Attorneys</p>
+    <h1>Meet Our Legal Team</h1>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="name">Maya Collins</div>
+      <div class="role">Family Lawyer</div>
+    </div>
+    <div class="card">
+      <div class="name">Ethan Brooks</div>
+      <div class="role">Business Lawyer</div>
+    </div>
+    <div class="card">
+      <div class="name">Lina Hart</div>
+      <div class="role">Insurance Lawyer</div>
+    </div>
+    <div class="card">
+      <div class="name">Noah Pierce</div>
+      <div class="role">Criminal Defense</div>
+    </div>
+  </div>
+</section>
+
+<!-- MINED BOOKINGS TABLE (only if posts exist) -->
+{% if posts %}
+<section id="requests" style="max-width: 1100px; margin: 0 auto; padding: 0 50px 80px;">
+  <div class="title">
+    <p style="color:#666; font-weight:700;">Mined Records</p>
+    <h1>Appointments on Blockchain</h1>
+  </div>
+
+  <div style="overflow-x:auto;">
+    <table class="chain-table">
+      <thead>
+        <tr>
+          <th>Block</th>
+          <th>Time</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Department</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for post in posts %}
+        <tr>
+          <td>#{{ post.index }}</td>
+          <td>{{ readable_time(post.timestamp) }}</td>
+          <td>{{ post.name }}</td>
+          <td>{{ post.email }}</td>
+          <td>{{ post.phone }}</td>
+          <td>{{ post.department }}</td>
+          <td>{{ post.message }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
